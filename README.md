@@ -1,24 +1,34 @@
-## AWS Amplify React+Vite Starter Template
+# Mudskipper QMS
 
-This repository provides a starter template for creating applications using React+Vite and AWS Amplify, emphasizing easy setup for authentication, API, and database capabilities.
+Quality Management System for document management, task tracking, and operational data.
 
-## Overview
+## What's Implemented
 
-This template equips you with a foundational React application integrated with AWS Amplify, streamlined for scalability and performance. It is ideal for developers looking to jumpstart their project with pre-configured AWS services like Cognito, AppSync, and DynamoDB.
+- **Admin User Management**: Invite users via email with permission levels (1-5), edit user permissions, and view all users. Only Level 5 (Super Admin) can access admin features.
 
-## Features
+## Tech Stack
 
-- **Authentication**: Setup with Amazon Cognito for secure user authentication.
-- **API**: Ready-to-use GraphQL endpoint with AWS AppSync.
-- **Database**: Real-time database powered by Amazon DynamoDB.
+- **Frontend**: React + Vite + TypeScript
+- **Backend**: AWS Amplify Gen 2
+- **Authentication**: AWS Cognito User Pools
+- **Database**: Amazon DynamoDB
+- **Serverless Functions**: AWS Lambda
 
-## Deploying to AWS
+## Setup
 
-For detailed instructions on deploying your application, refer to the [deployment section](https://docs.amplify.aws/react/start/quickstart/#deploy-a-fullstack-app-to-aws) of our documentation.
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-## Security
+2. Start the sandbox:
+   ```bash
+   npx ampx sandbox
+   ```
 
-See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+## Usage
+
+Access the `/admin` page to invite users and manage permissions. Only Level 5 (Super Admin) users can access this page.
 
 ## License
 

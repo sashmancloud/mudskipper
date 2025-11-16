@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { useAuthenticator } from '@aws-amplify/ui-react';
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
+import AdminPage from "./pages/Admin";
+import Layout from "./components/Layout";
 
 const client = generateClient<Schema>();
 
 function App() {
   const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
-  const { user, signOut } = useAuthenticator();
 
   useEffect(() => {
     client.models.Todo.observeQuery().subscribe({
@@ -23,27 +23,37 @@ function App() {
     client.models.Todo.delete({ id })
   }
 
+  // Minimal routing without adding a router: switch on pathname
+  const path = typeof window !== "undefined" ? window.location.pathname : "/";
+  if (path === "/admin") {
+    return (
+      <Layout>
+        <AdminPage />
+      </Layout>
+    );
+  }
   return (
-    <main>
-      <h1>{user?.signInDetails?.loginId}'s todos</h1>
-      <button onClick={createTodo}>+ new</button>
-      <ul>
-        {todos.map((todo) => (
-          <li 
-          onClick={() => deleteTodo(todo.id)}
-          key={todo.id}>{todo.content}
-          </li>
-        ))}
-      </ul>
+    <Layout>
       <div>
-        🥳 App successfully hosted. Try creating a new todo.
-        <br />
-        <a href="https://docs.amplify.aws/react/start/quickstart/#make-frontend-updates">
-          Review next step of this tutorial.
-        </a>
+        <h1>Welcome to Mudskipper</h1>
+        <p>Quality Management System</p>
+        
+        <div style={{ marginTop: "30px" }}>
+          <h2>Demo: Todos</h2>
+          <button onClick={createTodo}>+ new</button>
+          <ul>
+            {todos.map((todo) => (
+              <li 
+                onClick={() => deleteTodo(todo.id)}
+                key={todo.id}
+              >
+                {todo.content}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-      <button onClick={signOut}>Sign out</button>
-    </main>
+    </Layout>
   );
 }
 

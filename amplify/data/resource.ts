@@ -12,6 +12,20 @@ const schema = a.schema({
       content: a.string(),
     })
     .authorization((allow) => [allow.owner()]),
+  Users: a
+    .model({
+      email: a.string().required(),
+      first_name: a.string(),
+      last_name: a.string(),
+      permission_level: a.integer().required(), // 1-5
+      status: a.string().required(), // "active" | "suspended" | "deleted"
+      invited_by: a.string(), // user id
+      created_at: a.datetime().required(),
+      updated_at: a.datetime().required(),
+    })
+    // Access to this model will primarily be through backend functions.
+    // Keep general read/write restricted to owners to avoid broad client mutations.
+    .authorization((allow) => [allow.owner()]),
 });
 
 export type Schema = ClientSchema<typeof schema>;
