@@ -30,6 +30,11 @@ Quality Management System for document management, task tracking, and operationa
 
 Access the `/admin` page to invite users and manage permissions. Only Level 5 (Super Admin) users can access this page.
 
+## Documentation
+
+- **Requirements**: See `documents/REQUIREMENTS.md` for full feature specifications
+- **Architecture & Patterns**: See `documents/AI_AGENTS.md` for detailed architecture, patterns, and development guidelines
+
 ## License
 
 This library is licensed under the MIT-0 License. See the LICENSE file.
